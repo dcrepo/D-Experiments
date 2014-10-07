@@ -5,7 +5,7 @@ pragma(lib, "winhttp");
 
 int TestWinHttpOpen()
 {
-	import std.stdio : write, writeln, writefln;
+    import std.stdio : write, writeln, writefln;
 	
     DWORD dwSize = 0;
     DWORD dwDownloaded = 0;
@@ -14,35 +14,35 @@ int TestWinHttpOpen()
                hConnect = NULL,
                hRequest = NULL;
 
-	// MSDN recommends a minimum of 8K buffer (could also dynamically allocate this)
-	char[8192] OutBuffer;
+    // MSDN recommends a minimum of 8K buffer (could also dynamically allocate this)
+    char[8192] OutBuffer;
 	
     // Use WinHttpOpen to obtain a session handle.
     hSession = WinHttpOpen( "WinHTTP Example/1.0",  
                             WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
                             WINHTTP_NO_PROXY_NAME, 
                             WINHTTP_NO_PROXY_BYPASS, 0);
-	if (!hSession) return -1;
+    if (!hSession) return -1;
     scope(exit) WinHttpCloseHandle(hSession);
 
     // Specify an HTTP server.    
-	hConnect = WinHttpConnect( hSession, "www.microsoft.com", INTERNET_DEFAULT_HTTPS_PORT, 0);
-	if (!hConnect) return -2;
-	scope(exit) WinHttpCloseHandle(hConnect);
+    hConnect = WinHttpConnect( hSession, "www.microsoft.com", INTERNET_DEFAULT_HTTPS_PORT, 0);
+    if (!hConnect) return -2;
+    scope(exit) WinHttpCloseHandle(hConnect);
 	
     // Create an HTTP request handle.
-	hRequest = WinHttpOpenRequest( hConnect, "GET", cast(LPCWSTR)0,
-								   cast(LPCWSTR)0, WINHTTP_NO_REFERER, 
-								   WINHTTP_DEFAULT_ACCEPT_TYPES, 
-								   WINHTTP_FLAG_SECURE);
-	if (!hRequest) return -3;
-	scope(exit) WinHttpCloseHandle(hRequest);
+    hRequest = WinHttpOpenRequest( hConnect, "GET", cast(LPCWSTR)0,
+                                   cast(LPCWSTR)0, WINHTTP_NO_REFERER, 
+                                   WINHTTP_DEFAULT_ACCEPT_TYPES, 
+                                   WINHTTP_FLAG_SECURE);
+    if (!hRequest) return -3;
+    scope(exit) WinHttpCloseHandle(hRequest);
 
     // Send a request.
-	bResults = WinHttpSendRequest( hRequest,
-								   WINHTTP_NO_ADDITIONAL_HEADERS,
-								   0, WINHTTP_NO_REQUEST_DATA, 0, 
-								   0, 0);
+    bResults = WinHttpSendRequest( hRequest,
+                                   WINHTTP_NO_ADDITIONAL_HEADERS,
+                                   0, WINHTTP_NO_REQUEST_DATA, 0, 
+                                   0, 0);
  
     // End the request.
     if (!bResults) return -4;
@@ -66,10 +66,10 @@ int TestWinHttpOpen()
             if (!dwSize)
                 break;
 
-			// Prepare for new data (MSDN clears buffer each time..)
+            // Prepare for new data (MSDN clears buffer each time..)
             OutBuffer[] = 0;
             
-			// Read in data, but no more than OutBuffer.length
+            // Read in data, but no more than OutBuffer.length
             if (!WinHttpReadData( hRequest, cast(LPVOID)OutBuffer.ptr,
 				dwSize > OutBuffer.length ? OutBuffer.length : dwSize,
 				&dwDownloaded))
@@ -78,7 +78,7 @@ int TestWinHttpOpen()
             }
             else
             {
-				// Write data out (note we don't actually check charset encoding in this example)
+                // Write data out (note we don't actually check charset encoding in this example)
                 write(OutBuffer[0 .. dwDownloaded]);
             }
         
