@@ -3,7 +3,7 @@ import win32.windef;
 import win32.winhttp;
 pragma(lib, "winhttp");
 
-int TestWinHttpOpen()
+int TestWinHttpReadData()
 {
     import std.stdio : write, writeln, writefln;
 	
@@ -44,9 +44,9 @@ int TestWinHttpOpen()
                                    0, WINHTTP_NO_REQUEST_DATA, 0, 
                                    0, 0);
  
-    // End the request.
     if (!bResults) return -4;
-        
+    
+    // End the request.        
     bResults = WinHttpReceiveResponse( hRequest, NULL);
     
     // Keep checking for data until there is nothing left.
@@ -107,6 +107,6 @@ int TestWinHttpOpen()
 
 int main()
 {
-	TestWinHttpOpen();
+	TestWinHttpReadData();
 	return 0;
 }
