@@ -7,11 +7,14 @@ Important: AS most of these examples will be Windows-specific, be sure to get th
 
 Windows API bindings are linked from here: http://www.dsource.org/projects/bindings/wiki/WindowsApi
 
-Put the Windows bindings in a folder thats in your include path! I tend to put the bindings in dmd2/src/phobos/win32.
+Put the Windows bindings in a folder thats in your include path! I tend to put the bindings in "dmd2/src/phobos/win32".
+
+Note that I've added winhttp.d but it hasn't yet been merged - see https://github.com/dcrepo/dsource-bindings/blob/master/win32/winhttp.d
 
 Also important for compiling with Windows programs is using either the implib tool or coffimplib.
 
 IMPLIB: http://www.digitalmars.com/ctg/implib.html
+
 COFFIMPLIB: http://www.digitalmars.com//ctg/coffimplib.html
 
 Find IMPLIB in Basic Utilities download at http://www.digitalmars.com//download/freecompiler.html
@@ -58,4 +61,5 @@ http://wiki.dlang.org/Open_Source_Projects
 Check out the D DUB repos as these are integrated in most IDE's and help experimenting and using other libraries:
 
 http://wiki.dlang.org/DUB
+
 http://code.dlang.org/
